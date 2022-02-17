@@ -3,7 +3,7 @@ let table = document.getElementById('myTable')
 
 
 let ShiftData = async () => {
-    let response = await fetch('https://localhost:44367/api/shift/')
+    let response = await fetch('https://localhost:44367/api/shifts/')
     let data = await response.json()
     return data
 }
@@ -11,7 +11,7 @@ let ShiftData = async () => {
 let findDepByShiftID = async (shiftID) => {
     let empShiftRes = await fetch(`https://localhost:44367/api/empShifts/${shiftID}`)
     let empShiftData = await empShiftRes.json();
-    let depRes = await fetch(`https://localhost:44367/api/Department/${empShiftData.EmployeeID}`)
+    let depRes = await fetch(`https://localhost:44367/api/department/${empShiftData.EmployeeID}`)
     let depData = await depRes.json();
     return depData;
 
