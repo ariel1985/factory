@@ -10,6 +10,21 @@ npm init
 npm run start
 ```
 
+For developing mode use node monitor
+
+```
+sudo npm i -g nodemon
+```
+
+To check:
+
+```
+curl --header "Content-Type: application/json" --request POST --data '{"filter": []}' http://localhost:8000
+
+
+curl --header "Content-Type: application/json" --request POST --data '{"filter": ["username":"admin", "password":"123456]}' http://localhost:8000/api/usercheck
+```
+
 - https://developerhowto.com/2018/12/29/build-a-rest-api-with-node-js-and-express-js/
 
 A Basic Node.js/Express REST API implementation example.

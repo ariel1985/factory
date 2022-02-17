@@ -1,0 +1,39 @@
+<html lang="en">
+	<head>
+		<link rel="stylesheet" href="/style.css">
+		<meta charset="UTF-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>EDIT EMP</title>
+	</head>
+	<body class="bodyClass">
+		<div class="border">
+			<span>Hello</span> <span id="fullnamenav"></span> 
+			<span>NumOfActions </span> <span id="numOfActionsnav"></span> 
+			<input id="logout" type="button" value="logout">
+			<div class="navlinks">
+				<a href="/login.html">LOGIN 1</a>
+				<a href="/homepage/homepage.html">HOMEPAGE 2</a>
+				<a href="/employeeMenu/employeeMenu.html">EMPLOYEE MENU 3</a>
+				<a href="/employeeMenu/edit_Employee.html">EDIT EMP 4</a>
+				<a href="/DepartmentMenu/departmentMenu.html">DEPARTMENT MENU 5</a>
+				<a href="/DepartmentMenu/edit_Department.html">EDIT DEPS 6</a>
+				<a href="/DepartmentMenu/add_Department.html">ADD DEP 7</a>
+				<a href="/shiftMenu/shiftMenu.html">SHIFT MENU 8</a>
+				<a href="/shiftMenu/addShift.html">SHIFT ADD 9</a>
+				</div>
+			</div>
+			<div>
+				<form id="form" action="">
+					<span>fname</span> <input type="text" id="fname">
+					<span>lname</span> <input type="text" id="lname">
+					<span>StartOfWorkingYear</span>  <select name="StartOfWorkingYear" id="StartOfWorkingYear">  </select> 
+					<span>Department</span> <select name="Departments" id="deps">  </select> 
+					<input type="submit" value="Update">
+				</form>
+			</div>
+		</div>
+	</body>
+	<script src="/vertify.js"></script>
+	<script src="editEmployee.js"></script>
+</html>
