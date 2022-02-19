@@ -1,3 +1,5 @@
+const serverURL = "http://localhost:8000"
+
 let table = document.getElementById("myTable")
 const search = document.getElementById("search")
 
@@ -10,13 +12,13 @@ let arr = [{
 }]
 arr
 
-let getDep = async (id) => fetch(`https://localhost:44367/api/department/${id}`)
+let getDep = async (id) => fetch(`${serverURL}/api/department/${id}`)
 
-let getShifts = async (id) => fetch(`https://localhost:44367/api/shift/${id}`)
+let getShifts = async (id) => fetch(`${serverURL}/api/shift/${id}`)
 
 
 let displayEmployeeData = async () => {
-    let ResponseEMP = await fetch('https://localhost:44367/api/employees')
+    let ResponseEMP = await fetch(`${serverURL}/api/employees`)
     let empData = await ResponseEMP.json()
 
 
@@ -34,7 +36,7 @@ let displayEmployeeData = async () => {
 
         //Adds the Fullname to a link with a href to the ID for the edit Employeepage 
         let NameData = document.createElement('td')
-        NameData.innerHTML = `<a href="../employeeMenu/edit_Employee.html?empid=${emp.ID}"> ${emp.fname} ${emp.lname} </a>`
+        NameData.innerHTML = `<a href="../employee/edit_Employee.html?empid=${emp.ID}"> ${emp.fname} ${emp.lname} </a>`
 
         //Adds Start Of Working Year (Converted with DateOBJ)
         let StartOfWorkingData = document.createElement('td')
@@ -74,13 +76,13 @@ let displayEmployeeData = async () => {
 
 
                 editButton.addEventListener("click", e => {
-                    window.location.replace(`../employeeMenu/edit_Employee.html?empid=${emp.ID}`)
+                    window.location.replace(`../employee/edit_Employee.html?empid=${emp.ID}`)
                 })
                 addButton.addEventListener("click", e => {
-                    window.location.replace(`../shiftMenu/addShift.html`)
+                    window.location.replace(`../shift/addShift.html`)
                 })
                 deleteButton.addEventListener("click", e => {
-                    fetch(`https://localhost:44367/api/employee/${emp.ID}`, {
+                    fetch(`${serverURL}/api/employee/${emp.ID}`, {
                             method: 'delete'
                         })
 
@@ -156,21 +158,4 @@ search.addEventListener('keyup', () => {
             }
         }
     }
-
-
-
-    // let tds = document.querySelectorAll('td')
-    // const term = search.value.trim().toLowerCase();
-    // let trs = document.querySelectorAll('tr')
-    //             console.log(trs)
-    // trs.forEach(tr => { tr.classList.remove("hide")})
-
-    // tds.forEach(td => 
-    //         {   
-    //             if(td.innerText.toLowerCase().startsWith(term) && term.length > 0) 
-    //             {    
-
-    //                 td.parentElement.classList.add("hide")
-    //             }
-    //             })  
 });

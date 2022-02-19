@@ -27,17 +27,11 @@ curl --header "Content-Type: application/json" --request POST --data '{"filter":
 curl --header "Content-Type: application/json" --request POST --data '{"filter": ["username":"admin", "password":"123456]}' http://localhost:8000/api/usercheck
 ```
 
-- https://developerhowto.com/2018/12/29/build-a-rest-api-with-node-js-and-express-js/
-
-A Basic Node.js/Express REST API implementation example.
-
-Full Tutorial at https://developerhowto.com/2018/12/29/build-a-rest-api-with-node-js-and-express-js/
-
-# Usage
+## Usage
 
 - Run `npm install` to installl dependencies
 - Run `npm run start` to start the local server
-- Load `http://localhost:8000` to test the endpoint. It will display a json result `{"message":"Ok"}`
+- Load `http://localhost:8000` to test the endpoint.
 
 ## API Endpoints
 
@@ -51,14 +45,12 @@ Get a list of users
   "data": [
     {
       "id": 1,
-      "name": "admin",
-      "email": "admin@example.com",
+      "username": "admin",
       "password": "a66abb5684c45962d887564f08346e8d"
     },
     {
       "id": 2,
-      "name": "user",
-      "email": "user@example.com",
+      "username": "user",
       "password": "4da49c16db42ca04538d629ef0533fe8"
     }
   ]

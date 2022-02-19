@@ -1,6 +1,6 @@
 let form = document.getElementById("form")
-let usernameinput = document.getElementById("userinput")
-let passwordInput = document.getElementById("passinput")
+let username = document.getElementById("inuser")
+let userpass = document.getElementById("inpass")
 let loginObj = {
     "username": "null",
     "password": "null"
@@ -9,9 +9,7 @@ let loginObj = {
 const serverURL = "http://localhost:8000"
 
 let login = async (loginObj) => {
-    let answer = false
-    //SENDS POST REQUEST TO USERBASETABLE AND RETURNS A CUSTOM USEROBJECT
-    //WITH THE PASSWORD
+    let output = false
     const rawResponse = await fetch(`${serverURL}/api/authenticate/`, {
         method: 'POST',
         headers: {
@@ -23,15 +21,11 @@ let login = async (loginObj) => {
             password: loginObj.password
         })
     });
-    //USEROBJECT
     const json = await rawResponse.json();
     const user = json.data
-    console.log(user)
-    //API REETURNS NULL USER OBJECT IF INCORRECT PASSWORD/USERNAME
     if (user.ID == 0) {
         alert("Password/username is not correct")
     } else if (user.id != 0) {
-        //SETS THE LOCALSTORAGE FOR USER/FULLNAME/NUM OF ACTIONS
         let today = new Date()
         window.localStorage.setItem("id", user.ID)
         window.localStorage.setItem('fullname', user.full_name)
@@ -47,12 +41,8 @@ let login = async (loginObj) => {
         {
 
             let lastLoginPlus24hours = parseInt(window.localStorage.getItem(`lastLogin${loginObj.username}`)+86400)
-            console.log()
             if (today.getTime() > lastLoginPlus24hours) 
             {
-                console.log(`Last login is: ${window.localStorage.getItem(`lastLogin${loginObj.username}`)}`)
-                console.log(`Last login plis 24 hours is + ${lastLoginPlus24hours}`)
-                console.log(`Today is ${today.getTime()}`)
                 let numberOfActionsObj = { numOfActions: 10}
         
                 const putMethod = {
@@ -70,9 +60,7 @@ let login = async (loginObj) => {
             }
 
         }
-        //REDIRECTS TO HOMEPAGE
-        // location.href = 'http://127.0.0.1:5500/homepage/homepage.html'
-        answer = true
+        output = true
     }
     return answer
 }
@@ -80,14 +68,13 @@ let login = async (loginObj) => {
 
 
 form.addEventListener("submit", e => {
-    e.preventDefault()
+    e.preventDefault() // do not submit by HTML
     e.stopPropagation()
-    loginObj.username = usernameinput.value;
-    loginObj.password = passwordInput.value;
-    console.log("LOG-IN Button pressed")
+
+    loginObj.username = username.value;
+    loginObj.password = userpass.value;
 
     login(loginObj).then(Response => {
-
         if (Response) {
             window.location.replace('homepage/homepage.html')
         }

@@ -1,40 +1,21 @@
+
+const serverURL = "http://localhost:8000"
+
 let table = document.getElementById("myTable")
-
-
-
-let getMangerName = async (id) => fetch(`https://localhost:44367/api/employee/${id}`)
-
-// let getShifts = async (id) => fetch(`https://localhost:44367/api/shift/${id}`)
-
-
+let getMangerName = async (id) => fetch(`${serverURL}/api/employee/${id}`)
 let displayDepData = async () => {
-    let ResponseDEP = await fetch('https://localhost:44367/api/departments')
+    let ResponseDEP = await fetch(`${serverURL}/api/departments`)
     let depData = await ResponseDEP.json()
-    let empData = await fetch('https://localhost:44367/api/employees/')
-
-
     let count = 0
-    let hasShift = false
 
-    depData.forEach(dep => {
-        count++
-        console.log(dep)
-        //CREATES A ROW FOR EACH DEP
+    depData.forEach( dep => {
+        count++;
         let row = document.createElement("tr")
-
-        //Creates the counter for the amount of deps
         let countData = document.createElement('td')
-        countData.innerText = count
-
-
         let nameData = document.createElement('td')
-        nameData.innerText = dep.name
-
-
         let mangerData = document.createElement('td')
-
-
-
+        countData.innerText = count
+        nameData.innerText = dep.name
         getMangerName(dep.mangerFK).then(Response => Response.json())
             .then(data => {
                 console.log(data)
@@ -42,52 +23,41 @@ let displayDepData = async () => {
 
             })
 
-        //Gets EMP shifts using emp ID and displays the shifts 
         let buttonData = document.createElement('td')
-
         let editButton = document.createElement('input')
-
         let deleteButton = document.createElement('input')
 
         deleteButton.setAttribute('type', 'button')
         editButton.setAttribute('type', 'button')
-
         editButton.setAttribute('value', 'EDIT')
-
         deleteButton.setAttribute('value', 'DELETE')
         console.log(dep.DepartmentID)
         editButton.addEventListener("click", e => {
-            window.location.replace(`../DepartmentMenu/edit_Department.html?depid=${dep.ID}`)
+            window.location.replace(`../department/edit_Department.html?depid=${dep.ID}`)
         })
 
         deleteButton.addEventListener("click", e => {
             checkNumOfActions().then(answer => {
                     if (answer) {
-                        fetch(`https://localhost:44367/api/department/${dep.ID}`, {
+                        fetch(`${serverURL}/api/department/${dep.ID}`, {
                             method: 'delete'
                         })
                         alert("deleted")
-                        window.location.replace(`../DepartmentMenu/departmentMenu.html`)
+                        window.location.replace(`../department/department.html`)
                     }
 
                 }
-
             )
-
         })
-
 
         buttonData.appendChild(deleteButton)
         buttonData.appendChild(editButton)
-
 
         row.appendChild(countData)
         row.appendChild(nameData)
         row.appendChild(mangerData)
         row.appendChild(buttonData)
         table.appendChild(row)
-
-
     })
 }
 

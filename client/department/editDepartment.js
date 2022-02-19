@@ -4,38 +4,34 @@ const mangerDropbox = document.getElementById('manger')
 const depDropbox = document.getElementById('department')
 const urlParams = new URLSearchParams(window.location.search);
 const myParam = urlParams.get('depid');
+const serverURL = "http://localhost:8000"
+
 let UpdateDeps = () => {
     let depObj = {
         name: nameInput.value,
         mangerFK: parseInt(mangerDropbox.value)
     }
     let depID = depDropbox.value
-    console.log(depObj)
-    console.log(depID)
 
     const putMethod = {
-        method: 'PUT', // Method itself
+        method: 'PUT', 
         headers: {
-            'Content-type': 'application/json; charset=UTF-8' // Indicates the content 
+            'Content-type': 'application/json; charset=UTF-8' 
         },
-        body: JSON.stringify(depObj) // We send data in JSON format
+        body: JSON.stringify(depObj) 
     }
 
     if (nameInput.value.length > 3) {
-        fetch(`https://localhost:44367/api/Department/${depID}`, putMethod)
+        fetch(`${serverURL}/api/Department/${depID}`, putMethod)
         setTimeout(() => {
             location.reload();
         }, 500);
-        alert("EDITED")
-    } else {
-        alert("NEW NAME NEEDS TO BE AT LEAST 3 CHARS LONG")
     }
-
 }
 
 
 let addEmps = () => {
-    fetch('https://localhost:44367/api/Employee')
+    fetch(`${serverURL}/api/Employee`)
         .then(Response => Response.json())
         .then(data => {
             let select = document.getElementById("deps");
@@ -52,7 +48,7 @@ let addEmps = () => {
 addEmps()
 
 let getDeps = () => {
-    fetch('https://localhost:44367/api/Department')
+    fetch(`${serverURL}/api/Department`)
         .then(Response => Response.json())
         .then(data => {
             let select = document.getElementById("deps");
@@ -68,49 +64,23 @@ let getDeps = () => {
                         if (op.value == data[index].mangerFK) {
                             op.setAttribute('selected', 0)
                         }
-
-
                     })
-
                 }
-
-
             }
-
-
-
 
             document.getElementById('department').childNodes.forEach(op => {
                 console.log(op)
                 if (op.value == myParam) {
                     op.setAttribute('selected', 0)
-
-
-
                 }
-
-
             });
-
         })
-
-
 }
-
 
 form.addEventListener("submit", (e) => {
     e.preventDefault()
     checkNumOfActions()
         .then(answer => {
-                if (answer) {
-                    UpdateDeps()
-                } else {
-                    console.log("///")
-                }
-
-            }
-
-        )
-
-
+            if (answer) UpdateDeps()
+        })
 })

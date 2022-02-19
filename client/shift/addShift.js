@@ -4,18 +4,17 @@ const btn = document.getElementById('btn')
 const start = document.getElementById('start')
 const end = document.getElementById('end')
 const form = document.getElementById('form')
-console.log(empDropbox)
 
-fetch('https://localhost:44367/api/employees')
+const serverURL = "http://localhost:8000"
+
+fetch(`${serverURL}/api/employees`)
     .then(Response => Response.json())
     .then(data => {
 
-        for (let index = 0; index < data.length; index++) {
-            console.log(data[index])
-
+        for (let i = 0; i < data.length; i++) {
             let option = document.createElement("option");
-            option.text = data[index].fname + " " + data[index].lname;
-            option.value = data[index].ID;
+            option.text = data[i].fname + " " + data[i].lname;
+            option.value = data[i].ID;
             empDropbox.appendChild(option)
         }
     })
@@ -41,10 +40,7 @@ form.addEventListener('submit', e => {
 
     checkNumOfActions().then(answer => {
         if (answer) {
-            fetch('https://localhost:44367/api/shift/add', postMethod)
-            alert("Added a shift!")
+            fetch(`${serverURL}/api/shift/add`, postMethod)
         }
     })
-
-
 })
