@@ -3,7 +3,7 @@ const nameInput = document.getElementById('name')
 const mangerDropbox = document.getElementById('manger')
 
 
-fetch('https://localhost:44367/api/Employee')
+fetch('https://localhost:44367/api/employees')
     .then(Response => Response.json())
     .then(data => {
         let select = document.getElementById("deps");
@@ -37,7 +37,7 @@ form.addEventListener("submit", (e) => {
 
     checkNumOfActions().then(answer => {
         if (answer) {
-            fetch(`https://localhost:44367/api/Department/`, postMethod)
+            fetch(`https://localhost:44367/api/departments/`, postMethod)
             alert("ADDED")
             location.reload();
         }

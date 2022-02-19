@@ -5,8 +5,6 @@ const DBSOURCE = "db.sqlite"
 
 let db = new sqlite3.Database(DBSOURCE, (err) => {
 
-    console.log('I recreated the db again???', 'sqlite3')
-
     if (err) {
       // Cannot open database
       console.error(err.message)
@@ -15,11 +13,11 @@ let db = new sqlite3.Database(DBSOURCE, (err) => {
 
     console.log('Connected to the SQLite database.')
 
-    const setForeignKeys = "PRAGMA foreign_keys = OFF;"
+    const setForeignKeys = "PRAGMA foreign_keys = OFF;" // less strict
     db.run(setForeignKeys,
         (err) => {
-            if (err) console.log('DB is set Foreign Keys OFF');
-            else console.warn('DB is set Foreign Keys ON');
+            if (err) console.log('Fail: DB set Foreign Keys');
+            else console.warn('Success: DB set Foreign Keys');
         });
 
     // ---------------------------
@@ -36,7 +34,7 @@ let db = new sqlite3.Database(DBSOURCE, (err) => {
     db.run(userTable,
     (err) => {
         if (err) {
-            console.log('Table already created : user')
+            console.log('Table already created : user', err)
         } else {
             // Table just created, creating some rows
             var insert = 'INSERT INTO User (fullname, username, password,num_actions ) VALUES (?,?,?,?)'

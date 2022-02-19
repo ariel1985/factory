@@ -1,7 +1,6 @@
 // Create express app
 const express = require("express")
 const app = express()
-const db = require("./db/database")
 const apiRoutes = require("./routes/api.route")
 
 const bodyParser = require("body-parser");
@@ -20,7 +19,8 @@ app.listen(HTTP_PORT, () => {
 // Root endpoint
 app.get("/", (req, res, next) => {
     // res.json({"message":"Ok"})
-    res.send("Page not found.")
+    // TODO - redirect to login/home page
+    res.send("This page is not found.") 
 });
 
 // API endpoints in routes

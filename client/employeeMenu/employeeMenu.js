@@ -10,13 +10,13 @@ let arr = [{
 }]
 arr
 
-let getDep = async (id) => fetch(`https://localhost:44367/api/Department/${id}`)
+let getDep = async (id) => fetch(`https://localhost:44367/api/department/${id}`)
 
 let getShifts = async (id) => fetch(`https://localhost:44367/api/shift/${id}`)
 
 
 let displayEmployeeData = async () => {
-    let ResponseEMP = await fetch('https://localhost:44367/api/Employee')
+    let ResponseEMP = await fetch('https://localhost:44367/api/employees')
     let empData = await ResponseEMP.json()
 
 
@@ -80,7 +80,7 @@ let displayEmployeeData = async () => {
                     window.location.replace(`../shiftMenu/addShift.html`)
                 })
                 deleteButton.addEventListener("click", e => {
-                    fetch(`https://localhost:44367/api/Employee/${emp.ID}`, {
+                    fetch(`https://localhost:44367/api/employee/${emp.ID}`, {
                             method: 'delete'
                         })
 

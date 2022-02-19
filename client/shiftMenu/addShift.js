@@ -6,7 +6,7 @@ const end = document.getElementById('end')
 const form = document.getElementById('form')
 console.log(empDropbox)
 
-fetch('https://localhost:44367/api/Employee')
+fetch('https://localhost:44367/api/employees')
     .then(Response => Response.json())
     .then(data => {
 

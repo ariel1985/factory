@@ -12,7 +12,7 @@ let login = async (loginObj) => {
     let answer = false
     //SENDS POST REQUEST TO USERBASETABLE AND RETURNS A CUSTOM USEROBJECT
     //WITH THE PASSWORD
-    const rawResponse = await fetch(`${serverURL}/api/userbase/`, {
+    const rawResponse = await fetch(`${serverURL}/api/authenticate/`, {
         method: 'POST',
         headers: {
             'Accept': 'application/json',
@@ -24,7 +24,8 @@ let login = async (loginObj) => {
         })
     });
     //USEROBJECT
-    const user = await rawResponse.json();
+    const json = await rawResponse.json();
+    const user = json.data
     console.log(user)
     //API REETURNS NULL USER OBJECT IF INCORRECT PASSWORD/USERNAME
     if (user.ID == 0) {
@@ -63,7 +64,7 @@ let login = async (loginObj) => {
                 }
         
                 window.localStorage.setItem('numOfActions', 10)
-                fetch(`${serverURL}/api/Action/${user.ID}`, putMethod)
+                fetch(`${serverURL}/api/action/${user.ID}`, putMethod)
                 .then(res => console.log("YASS"))
                 window.localStorage.setItem(`lastLogin${loginObj.username}`, today.getTime())
             }

@@ -14,7 +14,7 @@ let form = document.getElementById("form")
 // {
 // let answer = false;
 // let userID = localStorage.getItem('id')  
-// let Response = await fetch(`https://localhost:44367/api/Action/${userID}`)
+// let Response = await fetch(`https://localhost:44367/api/action/${userID}`)
 // let numOfActionData = await Response.json()
 // if(!numOfActionData > 0) 
 // {
@@ -63,7 +63,7 @@ let putEmpData = () => {
     }
 
     console.log(putMethod)
-    fetch(`https://localhost:44367/api/Employee/${myParam}`, putMethod)
+    fetch(`https://localhost:44367/api/employee/${myParam}`, putMethod)
 }
 
 

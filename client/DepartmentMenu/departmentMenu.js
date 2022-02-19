@@ -2,15 +2,15 @@ let table = document.getElementById("myTable")
 
 
 
-let getMangerName = async (id) => fetch(`https://localhost:44367/api/Employee//${id}`)
+let getMangerName = async (id) => fetch(`https://localhost:44367/api/employee/${id}`)
 
 // let getShifts = async (id) => fetch(`https://localhost:44367/api/shift/${id}`)
 
 
 let displayDepData = async () => {
-    let ResponseDEP = await fetch('https://localhost:44367/api/Department')
+    let ResponseDEP = await fetch('https://localhost:44367/api/departments')
     let depData = await ResponseDEP.json()
-    let empData = await fetch('https://localhost:44367/api/Employee/')
+    let empData = await fetch('https://localhost:44367/api/employees/')
 
 
     let count = 0
@@ -63,7 +63,7 @@ let displayDepData = async () => {
         deleteButton.addEventListener("click", e => {
             checkNumOfActions().then(answer => {
                     if (answer) {
-                        fetch(`https://localhost:44367/api/Department/${dep.ID}`, {
+                        fetch(`https://localhost:44367/api/department/${dep.ID}`, {
                             method: 'delete'
                         })
                         alert("deleted")
